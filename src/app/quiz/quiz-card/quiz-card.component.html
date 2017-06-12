@@ -1,0 +1,101 @@
+<div *ngIf="currentQuestionId === question.id || isOver" class="row">
+  <div class="col s12 m8 offset-m2">
+    
+    <div class="card z-depth-0">
+    
+      <div class="card-content">
+    
+        <h6 class="grey-text center-align pad-bot-2">Question {{index + 1}} of {{totalQuestions}}</h6>
+
+        <div
+          *ngIf="question.image !== undefined"
+          class="center-align">
+          <img
+            [src]="'../../../assets/' + question.image"
+            [alt]="question.image"
+            class="image-round">
+        </div>
+        
+        <span class="card-title center-align pad-top-1 pad-bot-2">
+          {{question.question}} 
+        </span>
+    
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+
+            <div *ngIf="!isAnswered" class="row">
+              
+              <div
+                *ngFor="let answer of question.answers; let i = index"
+                class="col s12 m6">
+                <div class="pad-tb-1">
+                  <input
+                    #check
+                    (change)="answerClicked(i, check.checked, answer)"
+                    [disabled]="!check.checked && hasMarkedAnswer"
+                    type="checkbox"
+                    class="filled-in pink"
+                    id="answer{{i}}" />
+                  <label
+                    [ngClass]="{
+                      'teal-text': answer.correct && isAnswered,
+                      'pink-text': !answer.correct && isAnswered
+                    }"
+                    [attr.disabled]="isAnswered"
+                    for="answer{{i}}">{{answer.answer}}</label>
+                </div>
+              </div>
+
+            </div>
+            
+            <div *ngIf="isAnswered" class="center-align pad-top-1">
+            
+              <div *ngIf="isCorrect">
+                <button class="btn-floating waves-effect waves-light z-depth-0">
+                  <i class="material-icons">done</i>
+                </button>
+                <p class="grey-text pad-top-1">Your answer: <strong><span class="teal-text">{{correctAnswer}}</span></strong></p>
+              </div>
+            
+              <div *ngIf="!isCorrect">
+                <button class="btn-floating waves-effect waves-light pink z-depth-0">
+                  <i class="material-icons">clear</i>
+                </button>
+                <p class="grey-text pad-top-1">Your answer: <strong><span class="red-text">{{selectedAnswer}}</span></strong> - Correct answer: <strong><span class="teal-text">{{correctAnswer}}</span></strong></p>
+              </div>
+
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isOver" class="card-action">
+      
+        <div
+          *ngIf="hasMarkedAnswer && !isAnswered"
+          class="pad-tb-1 center-align">
+          <button
+            (click)="answerQuestionClicked()"
+            type="button"
+            class="waves-effect waves-light btn z-depth-0">Answer</button>
+        </div>
+      
+        <div
+          *ngIf="hasMarkedAnswer && isAnswered"
+          class="pad-tb-1 center-align">
+          <button
+            (click)="nextQuestionClicked()"
+            type="button"
+            class="waves-effect waves-light btn pink z-depth-0">Next Question</button>
+        </div>
+      
+        <div
+          *ngIf="!hasMarkedAnswer">
+          <p class="grey-text center-align pad-tb-h">Select an answer to continue to the next question</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

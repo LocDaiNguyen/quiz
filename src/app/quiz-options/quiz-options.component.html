@@ -1,0 +1,68 @@
+<div class="content-margin mar-top-2h">
+  <div class="row">
+    <div class="col s12 m8 offset-m2">
+
+      <form (ngSubmit)="save()" [formGroup]="quizOptionForm">
+        
+        <div class="card z-depth-0">
+          
+          <div class="card-content">
+
+            <span class="card-title center-align pad-top-1 pad-bot-2">Quiz Options</span>
+
+            <div class="row">
+              
+              <div class="input-field pad-bot-2">
+                <select
+                  formControlName="quizType"
+                  materialize="material_select"
+                  [materializeSelectOptions]="quizTypes">
+                  <option value="" disabled>Choose your quiz</option>
+                  <option *ngFor="let quizType of quizTypes" [value]="quizType">{{quizType}}</option>
+                  <option value="all">All</option>
+                </select>
+                <label>Quiz Type</label>
+              </div>
+            
+              <div class="input-field pad-bot-2">
+                <input
+                  formControlName="number"
+                  min="1"
+                  [max]="questionsLength"
+                  type="number"
+                  class="validate"
+                  id="numberOfQuestions">
+                <label for="numberOfQuestions" data-error="Max number exceeded">
+                  Number of questions - max questions for <span class="pink-text">{{quizType}} is {{questionsLength}}</span>
+                </label>
+              </div>
+            
+              <div class="pad-bot-2">
+                <h6 class="grey-text pad-bot-h">Randomize/Shuffle questions</h6>
+                <div class="switch z-depth-0">
+                  <label>
+                    Off
+                    <input
+                      formControlName="randomize"
+                      type="checkbox">
+                    <span class="lever"></span>
+                    On
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card-action center-align">
+            <button type="submit" class="waves-effect waves-light btn pink z-depth-0">Save</button>
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

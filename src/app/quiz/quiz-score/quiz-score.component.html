@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col s12 m8 offset-m2">
+    <div class="card z-depth-0 center-align">
+      <div class="card-content">
+        <p class="grey-text pad-top-1">Score</p>
+        <h2 class="pink-text">{{totalScore}} <span class="grey-text lighten-5">/ {{totalQuestions}} - </span> {{ (totalScore/totalQuestions)*100 }}%</h2>
+      </div>
+      <div class="card-action">
+        <button (click)="newGame()" class="waves-effect waves-light btn pink z-depth-0">New Quiz</button>
+      </div>
+    </div>
+  </div>
+</div>
+

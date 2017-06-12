@@ -1,0 +1,24 @@
+<app-quiz-progress
+  [progress]="progress"></app-quiz-progress>
+
+<div class="content-margin">
+
+  <app-quiz-score
+    *ngIf="isOver"
+    [totalQuestions]="totalQuestions"
+    [totalScore]="totalScore"
+    (newQuiz)="newQuiz()"></app-quiz-score>
+
+  <app-quiz-card
+    *ngFor="let question of questions; let i = index"
+    [index]="i"
+    [question]="question"
+    [totalQuestions]="totalQuestions"
+    [currentQuestionId]="currentQuestionId"
+    [currentQuestionIndex]="currentQuestionIndex"
+    [isOver]="isOver"
+    (nextQuestionId)="setCurrentQuestionId($event)"
+    (addScore)="addScore($event)"
+    (addQuestionsAnswered)="addQuestionsAnswered($event)"></app-quiz-card>
+
+</div>
